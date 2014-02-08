@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class TestSeZoin {
 
-	final int LoadTest = 500;
+	
 	final static Map<String,Integer> TestNumbers = new HashMap<>();
 	
 	static {
@@ -45,13 +45,13 @@ public class TestSeZoin {
 	@Test
 	public void testConvertTo3() {
 		for ( Entry<String,Integer> e : TestNumbers.entrySet()) {
-			assertEquals(e.getKey(), at.spi.Roem.convertTo3(e.getValue()));
+			assertEquals(e.getKey(), at.spi.Roem.convertTo3_SpindiOptimiert(e.getValue()));
 		}
 	}
 	@Test
 	public void testConvertTo4() {
 		for ( Entry<String,Integer> e : TestNumbers.entrySet()) {
-			assertEquals(e.getKey(), at.spi.Roem.convert(e.getValue()));
+			assertEquals(e.getKey(), at.spi.Roem.convertTo4_niceWithStringArray(e.getValue()));
 		}
 	}
 	@Test
@@ -64,7 +64,7 @@ public class TestSeZoin {
 	public void testConvertTo6() {
 		StringBuilder sb = new StringBuilder();
 		for ( Entry<String,Integer> e : TestNumbers.entrySet()) {
-			at.spi.Roem.convertTo6(e.getValue(),sb);
+			at.spi.Roem.convertTo6_withPassedInStringBuilder(e.getValue(),sb);
 			assertEquals(e.getKey(), sb.toString());
 		}
 	}
@@ -95,7 +95,7 @@ public class TestSeZoin {
 	@Test 
 	public void HinUndHer3() {
 		for ( int i=1; i <= 10000; i++) {
-			final String RoemZahl = at.spi.Roem.convertTo3(i);
+			final String RoemZahl = at.spi.Roem.convertTo3_SpindiOptimiert(i);
 			final int ParsedVal = at.spi.Roem.parse(RoemZahl);
 			// und jezan miassatns gleich sei
 			assertEquals(i, ParsedVal);
@@ -104,7 +104,7 @@ public class TestSeZoin {
 	@Test 
 	public void HinUndHer4() {
 		for ( int i=1; i <= 10000; i++) {
-			final String RoemZahl = at.spi.Roem.convert(i);
+			final String RoemZahl = at.spi.Roem.convertTo4_niceWithStringArray(i);
 			final int ParsedVal = at.spi.Roem.parse(RoemZahl);
 			// und jezan miassatns gleich sei
 			assertEquals(i, ParsedVal);
@@ -123,7 +123,7 @@ public class TestSeZoin {
 	public void HinUndHer6() {
 		final StringBuilder sb = new StringBuilder();
 		for ( int i=1; i <= 10000; i++) {
-			at.spi.Roem.convertTo6(i,sb);
+			at.spi.Roem.convertTo6_withPassedInStringBuilder(i,sb);
 			final int ParsedVal = at.spi.Roem.parse(sb.toString());
 			// und jezan miassatns gleich sei
 			assertEquals(i, ParsedVal);
@@ -161,47 +161,10 @@ public class TestSeZoin {
 		}
 	}
 	@Test
-	public void Load3() {
-		for (int i=0; i < LoadTest; i++) {
-			HinUndHer3();
-		}
-	}
-	@Test
-	public void Load1() {
-		for (int i=0; i < LoadTest; i++) {
-			HinUndHer1();
-		}
-	}
-	@Test
-	public void Load4() {
-		for (int i=0; i < LoadTest; i++) {
-			HinUndHer4();
-		}
-	}
-	@Test
-	public void Load5() {
-		for (int i=0; i < LoadTest; i++) {
-			HinUndHer5();
-		}
-	}
-	@Test
-	public void Load6() {
-		final StringBuilder sb = new StringBuilder();
-
-		for (int j=0; j < LoadTest; j++) {
-			for ( int i=1; i <= 10000; i++) {
-				at.spi.Roem.convertTo6(i,sb);
-				final int ParsedVal = at.spi.Roem.parse(sb.toString());
-				// und jezan miassatns gleich sei
-				assertEquals(i, ParsedVal);
-			}
-		}
-	}
-	@Test
 	public void Compare3toInternetz() {
 		for ( int i=1; i <= 10000; i++) {
 			// und jezan miassatns gleich sei
-			assertEquals( at.spi.Roem.convertTo3(i) , at.spi.Roem.convert(i));
+			assertEquals( at.spi.Roem.convertTo3_SpindiOptimiert(i) , at.spi.Roem.convertTo4_niceWithStringArray(i));
 		}
 	}
 }

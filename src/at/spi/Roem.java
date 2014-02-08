@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 public class Roem {
-	//
-	// first attemt
-	//
-	public final static List<Entry<Integer,String>> list = new ArrayList<>(); 
+	
 	
 	//
 	// second attempt
@@ -21,10 +18,15 @@ public class Roem {
 	//
 	final static int[] 		v4 = new int[] { 1000,900,500,400,100,90,50,40,10,9,5,4,1};
 	final static String[] 	r4 = new String[] { "M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
-	
+	//
+	// convert 5
+	//
 	final static String 	r5 = "M_CM_D_CD_C_XC_L_XL_X_IX_V_IV_I_";
 	final static int[]		x5 = new int[] { 0, 2, 5, 7, 10, 12, 15, 17, 20, 22, 25, 27, 30 };
-
+	//
+	// first attempt
+	//
+	public final static List<Entry<Integer,String>> list = new ArrayList<>(); 
 	static {
 		list.add(new AbstractMap.SimpleEntry<Integer,String>(1000, "M"));
 		list.add(new AbstractMap.SimpleEntry<Integer,String>( 500, "D"));
@@ -108,7 +110,7 @@ public class Roem {
 		}
 		return z;
 	}
-	public static String convertTo3(int number) {
+	public static String convertTo3_SpindiOptimiert(int number) {
 		if ( number <= 0) {
 			return  "gibt's ned bei de Röma";
 		}
@@ -139,7 +141,7 @@ public class Roem {
 		}
 		return z.toString();
 	}
-	public static String convert(int number) {
+	public static String convertTo4_niceWithStringArray(int number) {
 		
 		int idx = 0;
 		StringBuilder z = new StringBuilder();
@@ -174,7 +176,7 @@ public class Roem {
 		}
 		return z.toString();
 	}
-	public static void convertTo6(int number, final StringBuilder z) {
+	public static void convertTo6_withPassedInStringBuilder(int number, final StringBuilder z) {
 		
 		int idx = 0;
 		z.setLength(0);
